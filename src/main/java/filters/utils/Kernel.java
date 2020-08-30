@@ -1,9 +1,11 @@
 package filters.utils;
 
+import java.awt.image.BufferedImage;
+
 public class Kernel {
     float [][] values;
     int sizeXORY;
-    Kernel(float[][] v) throws IllegalArgumentException{
+    public Kernel(float[][] v) throws IllegalArgumentException{
         double sqrt = Math.sqrt(v.length - Math.floor(v.length));
         if(sqrt - Math.floor(sqrt) != 0)
             throw new IllegalArgumentException(new Error("the kernel is not square!"));
@@ -27,5 +29,8 @@ public class Kernel {
             }
         }
         return new Kernel(v);
+    }
+    public BufferedImage transformPhoto(){
+        return null;
     }
 }
