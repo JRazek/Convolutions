@@ -25,7 +25,7 @@ public class GrayScale {
         return newImage;
     }
     public static int transformPixel(Color c){
-        //return (int)((0.3f * c.getRed()) + (0.59f * c.getGreen()) + (0.11f * c.getBlue()));
-        return (c.getRed() + c.getGreen() + c.getBlue())/3;
+        return (int)((0.3f * c.getRed()) + (0.59f * c.getGreen()) + (0.11f * c.getBlue()));
+       // return (c.getRed() + c.getGreen() + c.getBlue())/3;
     }
 }

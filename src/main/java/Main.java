@@ -9,8 +9,9 @@ public class Main {
         try{
             SobelKernel s = new SobelKernel();
             BlurKernel b = new BlurKernel();
-            BufferedImage img = ((FileManager.loadImage("test.jpg")));
-            img = b.transform(s.transform(img));
+            BufferedImage img = ((FileManager.loadImage("old.jpg")));
+            img = b.transform(img);
+            img = s.transform(img);
             FileManager.writeImageJPG(img, "new.jpg");
         } catch (IOException e) {
             e.printStackTrace();

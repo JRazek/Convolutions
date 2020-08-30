@@ -28,6 +28,7 @@ public final class SobelKernel {
         int width = oldImg.getWidth();
         BufferedImage newImg = new BufferedImage(width, height, oldImg.getType());
         int biggest = 0;
+        int[][] tmpImg = new int[width][height];
         for(int y = 1; y < height-1; y ++){
             for(int x = 1; x < width-1; x++){
                 float[][] tmp = new float[3][3];
@@ -39,13 +40,24 @@ public final class SobelKernel {
                 }
                 Kernel tmpKernel = new Kernel(tmp);
                // System.out.println("multiply = " + this.kernelX.multiply(tmpKernel));
-                int xM = (int)this.kernelX.multiply(tmpKernel)/9;
-                int yM = (int)this.kernelY.multiply(tmpKernel)/9;
+                int xM = (int)this.kernelX.multiply(tmpKernel);
+                int yM = (int)this.kernelY.multiply(tmpKernel);
                 int sobeledGray = (int)(Math.sqrt( xM*xM + yM*yM ));
+                if(sobeledGray > biggest)
+                    biggest = sobeledGray;
+              //  Color sobeledRGB = new Color(sobeledGray, sobeledGray, sobeledGray);
+                tmpImg[x][y] = sobeledGray;
+                //newImg.setRGB(x, y, sobeledRGB.getRGB());
+            }
+        }
+        for(int y = 0; y < tmpImg[0].length; y++) {
+            for (int x = 0; x < tmpImg.length; x++) {
+                int sobeledGray = tmpImg[x][y]*255/biggest;
                 Color sobeledRGB = new Color(sobeledGray, sobeledGray, sobeledGray);
                 newImg.setRGB(x, y, sobeledRGB.getRGB());
             }
         }
+        System.out.println(biggest);
         return newImg;
     }
 }
