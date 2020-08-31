@@ -50,6 +50,8 @@ public class Kernel {
         int height = oldImg.getHeight();
         int width = oldImg.getWidth();
         BufferedImage newImg = new BufferedImage(width, height, oldImg.getType());
+        int biggest = 0;
+        int[][] tmpImg = new int[width][height];
         for(int y = 1; y < height-1; y ++){
             for(int x = 1; x < width-1; x++){
                 float[][] tmp = new float[3][3];
@@ -60,12 +62,24 @@ public class Kernel {
                     }
                 }
                 Kernel tmpKernel = new Kernel(tmp);
-                int finalPixel = ((int)this.multiply(tmpKernel)/valuesSum);
-                Color finalRGB = new Color(finalPixel, finalPixel, finalPixel);
-                newImg.setRGB(x, y, finalRGB.getRGB());
+                int finalPixel = ((int)this.multiply(tmpKernel));
+
+                if(finalPixel > biggest)
+                    biggest = finalPixel;
+                tmpImg[x][y] = finalPixel;
+
                /* System.out.println(sobeledGray);
                 Color sobeledRGB = new Color(sobeledGray, sobeledGray, sobeledGray);
                 */
+            }
+        }
+        //System.out.println(biggest);
+        for(int y = 0; y < tmpImg[0].length; y++) {
+            for (int x = 0; x < tmpImg.length; x++) {
+                int finalPixel = Math.abs(tmpImg[x][y]*255/biggest);
+                System.out.println(finalPixel);
+                Color finalRGB = new Color(finalPixel, finalPixel, finalPixel);
+                 newImg.setRGB(x, y, finalRGB.getRGB());
             }
         }
         return newImg;
