@@ -16,6 +16,7 @@ public class Main {
             img = b.transform(img);
             img = so.transform(img);
            // img = sh.transform(img);
+            //
             FileManager.writeImageJPG(img, "new.jpg");
         } catch (IOException e) {
             e.printStackTrace();
