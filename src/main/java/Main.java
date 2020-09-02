@@ -15,7 +15,7 @@ public class Main {
             BufferedImage img = GrayScale.transformImage((FileManager.loadImage("old.jpg")));
             img = b.transform(img);
             img = so.transform(img);
-           // img = sh.transform(img);
+           // img = sh.transform(img);;
             //
             FileManager.writeImageJPG(img, "new.jpg");
         } catch (IOException e) {
